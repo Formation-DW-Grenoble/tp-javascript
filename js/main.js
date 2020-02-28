@@ -49,6 +49,8 @@ $('#question-form').submit(function(event) {
     if (window.confirm('Voulez-vous recommencer?')) {
       // Revient à la première question
       currentQuestionId = 0;
+      // Vide la liste des réponses précédemment données
+      $('#answers-list').html('');
     } else {
       // Arrête la fonction pour éviter de charger une nouvelle question (ligne 33)
       return;
