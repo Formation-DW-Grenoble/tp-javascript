@@ -20,9 +20,15 @@ $('#question-form').submit(function(event) {
   // Augmente le numéro de la question actuelle de 1
   currentQuestionId += 1;
   // Si la dernière question a été atteinte
-  if (currentQuestionId === questionData.length) {
-    // Revient à la première question
-    currentQuestionId = 0;
+  if (currentQuestionId >= questionData.length) {
+    // Si l'utilisateur souhaite recommencer le quizz
+    if (window.confirm('Voulez-vous recommencer?')) {
+      // Revient à la première question
+      currentQuestionId = 0;
+    } else {
+      // Arrête la fonction pour éviter de charger une nouvelle question (ligne 33)
+      return;
+    }
   }
   // Charge la question correspondant à ce numéro
   loadQuestion(currentQuestionId);
