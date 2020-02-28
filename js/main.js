@@ -15,6 +15,19 @@ function loadQuestion(questionId) {
 
 // Associe une action à l'envoi du formulaire
 $('#question-form').submit(function(event) {
+  // Récupère le contenu du formulaire
+  var formContent = $('#question-form').serializeArray();
+  // Récupère le numéro de la réponse sélectionnée par l'utilisateur
+  var selectedAnswer = formContent[0].value;
+  // Si la réponse sélectionnée par l'utilisateur a le même numéro que la bonne réponse à la question
+    // (note: la réponse sélectionnée par l'utilisateur revient sous forme de texte,
+    // il faut donc commencer par la transformer en nombre)
+  if (Number(selectedAnswer) === questionData[currentQuestionId].rightAnswer) {
+    window.alert('Bonne réponse!');
+  } else {
+    window.alert('Mauvaise réponse!');
+  }
+
   // Empêche le rechargement de la page (comportement normal de l'envoi de formulaire)
   event.preventDefault();
   // Augmente le numéro de la question actuelle de 1
