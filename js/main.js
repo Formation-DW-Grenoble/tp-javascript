@@ -32,17 +32,20 @@ $('#question-form').submit(function(event) {
     // (note: la réponse sélectionnée par l'utilisateur revient sous forme de texte,
     // il faut donc commencer par la transformer en nombre)
   if (Number(selectedAnswer) === questionData[currentQuestionId].rightAnswer) {
-    // Affiche un message en pop-up
+    // Affiche un message dans la page
     $('#result').html('Bonne réponse!');
     // Définit les classes qui permettent d'afficher la réponse comme bonne
     var liClass = 'list-group-item-success';
     var iconClass = 'fa-thumbs-up';
   } else {
+    // Affiche un message dans la page
     $('#result').html('Mauvaise réponse!');
     // Définit les classes qui permettent d'afficher la réponse comme mauvaise
     var liClass = 'list-group-item-danger';
     var iconClass = 'fa-thumbs-down';
   }
+  // Lance une animation sur le message
+  animateCSS('#result', 'flip');
   // Crée un nouvel bloc de bonne ou mauvaise réponse
   var answerElement = $('<li class="list-group-item list-group-item-action ' + liClass + '"><i class="fas ' + iconClass + '"></i> <span class="question-text">' + questionData[currentQuestionId].text + '</span></li>');
   // Rajoute cet élément dans la liste des réponses
@@ -65,8 +68,16 @@ $('#question-form').submit(function(event) {
       return;
     }
   }
-  // Charge la question correspondant à ce numéro
-  loadQuestion(currentQuestionId);
+  // Au bout de 3 secondes, exécute une action
+  setTimeout(
+    function () {
+      // Charge la question correspondant à ce numéro
+      loadQuestion(currentQuestionId);
+      // Vide l'élément qui contient le résultat à la question précédente
+      $('#result').html('');
+    },
+    3000
+  );
 });
 
 // Charger la première question
