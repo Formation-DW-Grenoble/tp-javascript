@@ -19,6 +19,11 @@ $('#question-form').submit(function(event) {
   event.preventDefault();
   // Augmente le numéro de la question actuelle de 1
   currentQuestionId += 1;
+  // Si la dernière question a été atteinte
+  if (currentQuestionId === questionData.length) {
+    // Revient à la première question
+    currentQuestionId = 0;
+  }
   // Charge la question correspondant à ce numéro
   loadQuestion(currentQuestionId);
 });
