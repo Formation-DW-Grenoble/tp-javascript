@@ -33,12 +33,12 @@ $('#question-form').submit(function(event) {
     // il faut donc commencer par la transformer en nombre)
   if (Number(selectedAnswer) === questionData[currentQuestionId].rightAnswer) {
     // Affiche un message en pop-up
-    window.alert('Bonne réponse!');
+    $('#result').html('Bonne réponse!');
     // Définit les classes qui permettent d'afficher la réponse comme bonne
     var liClass = 'list-group-item-success';
     var iconClass = 'fa-thumbs-up';
   } else {
-    window.alert('Mauvaise réponse!');
+    $('#result').html('Mauvaise réponse!');
     // Définit les classes qui permettent d'afficher la réponse comme mauvaise
     var liClass = 'list-group-item-danger';
     var iconClass = 'fa-thumbs-down';
