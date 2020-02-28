@@ -1,27 +1,27 @@
+// Définit la valeur de départ de la question actuelle
 var currentQuestionId = 0;
 
-// Modifie le numéro de la question
-$('#question-id').html('1');
-// Modifie le texte de la question
-$('#current-question-text').html(questionData[0].text);
-// Modifie le texte des 4 réponses possibles à la question
-for (var i = 1; i <= 4; i += 1) {
-  $('#answer' + i + '-caption').html(questionData[0]['answer' + i]);
+// Fonction réutilisable qui permet de charger une question dans la page
+function loadQuestion(questionId) {
+  // Modifie le numéro de la question
+  $('#question-id').html(questionId + 1);
+  // Modifie le texte de la question
+  $('#current-question-text').html(questionData[questionId].text);
+  // Modifie le texte des 4 réponses possibles à la question
+  for (var i = 1; i <= 4; i += 1) {
+    $('#answer' + i + '-caption').html(questionData[questionId]['answer' + i]);
+  }
 }
 
 // Associe une action à l'envoi du formulaire
 $('#question-form').submit(function(event) {
-  currentQuestionId += 1;
   // Empêche le rechargement de la page (comportement normal de l'envoi de formulaire)
   event.preventDefault();
-  // Modifie le numéro de la question
-  $('#question-id').html(currentQuestionId + 1);
-  // Modifie le texte de la question
-  $('#current-question-text').html(questionData[currentQuestionId].text);
-  // Modifie le texte des 4 réponses possibles à la question
-  for (var i = 1; i <= 4; i += 1) {
-    $('#answer' + i + '-caption').html(questionData[currentQuestionId]['answer' + i]);
-  }
+  // Augmente le numéro de la question actuelle de 1
+  currentQuestionId += 1;
+  // Charge la question correspondant à ce numéro
+  loadQuestion(currentQuestionId);
 });
 
-
+// Charger la première question
+loadQuestion(0);
