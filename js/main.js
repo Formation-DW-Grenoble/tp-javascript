@@ -23,10 +23,21 @@ $('#question-form').submit(function(event) {
     // (note: la réponse sélectionnée par l'utilisateur revient sous forme de texte,
     // il faut donc commencer par la transformer en nombre)
   if (Number(selectedAnswer) === questionData[currentQuestionId].rightAnswer) {
+    // Affiche un message en pop-up
     window.alert('Bonne réponse!');
+    // Définit les classes qui permettent d'afficher la réponse comme bonne
+    var liClass = 'list-group-item-success';
+    var iconClass = 'fa-thumbs-up';
   } else {
     window.alert('Mauvaise réponse!');
+    // Définit les classes qui permettent d'afficher la réponse comme mauvaise
+    var liClass = 'list-group-item-danger';
+    var iconClass = 'fa-thumbs-down';
   }
+  // Crée un nouvel bloc de bonne ou mauvaise réponse
+  var answerElement = $('<li class="list-group-item list-group-item-action ' + liClass + '"><i class="fas ' + iconClass + '"></i> <span class="question-text">' + questionData[currentQuestionId].text + '</span></li>');
+  // Rajoute cet élément dans la liste des réponses
+  $('#answers-list').append(answerElement);
 
   // Empêche le rechargement de la page (comportement normal de l'envoi de formulaire)
   event.preventDefault();
