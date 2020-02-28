@@ -11,6 +11,15 @@ function loadQuestion(questionId) {
   for (var i = 1; i <= 4; i += 1) {
     $('#answer' + i + '-caption').html(questionData[questionId]['answer' + i]);
   }
+  // Récupère la liste des réponses possibles à la question
+  var answerList = $('#question-form').children('div');
+  // Pour chaque réponse présente dans la liste d'éléments
+  for (var answerElement of answerList) {
+    // Génère un nombre aléatoire entre 0 et 100
+    var randomNumber = Math.floor(Math.random() * Math.floor(100));
+    // Modifie la valeur d'ordre (flex) de la réponse
+    answerElement.style.order = -randomNumber;
+  }
 }
 
 // Associe une action à l'envoi du formulaire
